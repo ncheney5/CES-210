@@ -1,0 +1,33 @@
+    private void Text()
+    {
+        using (StreamReader mormon = new StreamReader ("book-or-mormon.json"))
+        using (StreamReader New = new StreamReader ("new-testament.json"))
+        using (StreamReader Old = new StreamReader ("old-testament.json"))
+        using (StreamReader DandC = new StreamReader ("doctrine-and-covenants.json"))
+        using (StreamReader PGP = new StreamReader ("pearl-of-great-price.json"))
+        {
+            string mormonText = mormon.ReadToEnd();
+            string newText = New.ReadToEnd();
+            string oldText = Old.ReadToEnd();
+            string dandcText = DandC.ReadToEnd();
+            string pgpText = PGP.ReadToEnd();
+
+            _text = mormonText + newText + oldText + dandcText + pgpText;
+        }
+    }
+
+    private void VersesText()
+    {
+        Text();
+        var scriptures = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, Dictionary<string, string>>>>(_text);
+        if (scriptures != null && scriptures.TryGetValue(_reference.GetReferance()[0], out var chapters) &&
+            chapters.TryGetValue(_reference.GetReferance()[1], out var verses))
+        {
+            _versesText = string.Join(" ", _reference.GetReferance().GetRange(2, _reference.GetReferance().Count - 2).Select(v => verses[v]));
+        }
+        else
+        {
+            _versesText = "No verses found for the given reference.";
+        }
+    }
+}
