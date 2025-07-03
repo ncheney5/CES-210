@@ -40,6 +40,9 @@ class Goal_list
             {
                 _goals[num].Record(r); // Call the Record method on the selected goal
                 Console.WriteLine("Goal marked as complete.");
+                Console.WriteLine("you now have " + r.getpoints + " points.");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
             }
             else
             {
@@ -159,5 +162,8 @@ class Goal_list
         {
             Console.WriteLine("Invalid option. Please try again.");
         }
+        Console.WriteLine($"Goal '{name}' has been added successfully.");
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey();
     }
 }

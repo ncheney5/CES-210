@@ -93,17 +93,23 @@ class rewards
             {
                 _points -= reward.Value;
                 Console.WriteLine($"You have redeemed {reward.Key} for {reward.Value} points.");
+                Console.WriteLine($"You now have {_points} points left.");
+                Console.Write("Press any key to continue...");
+                Console.ReadKey();
                 // Logic to give the user the reward
             }
             else
             {
                 Console.WriteLine("You do not have enough points to redeem this reward.");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
             }
         }
         else
         {
             Console.WriteLine("Invalid selection. Please try again.");
         }
-        
+
     }
+    
 }

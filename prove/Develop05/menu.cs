@@ -42,7 +42,7 @@ class menu
                     break;
                 case "4":
                     _isRunning = false;
-                    _goalList.save(_fileName, rewards.getpoints); // Save goals before exiting
+                    _goalList.save(_fileName, rewards.getpoints);
                     Console.WriteLine("Goals saved successfully.");
                     Console.WriteLine("Exiting the program. Goodbye!");
                     break;
