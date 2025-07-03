@@ -38,6 +38,6 @@ class Program
             }
 
         }
-        menu mainMenu = new menu(fileName);
+        Menu mainMenu = new Menu(fileName);
     }
 }

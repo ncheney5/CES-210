@@ -1,22 +1,22 @@
 using System.IO.Enumeration;
 
-class menu
+class Menu
 {
     private bool _isRunning;
     private string _fileName;
-    private Goal_list _goalList;
-    private rewards rewards;
-    public menu(string fileName)
+    private Goal_List _goalList;
+    private Rewards rewards;
+    public Menu(string fileName)
     {
         _fileName = fileName;
         _isRunning = true;
-        _goalList = new Goal_list(_fileName);
-        rewards = new rewards(fileName);
+        _goalList = new Goal_List(_fileName);
+        rewards = new Rewards(fileName);
 
-        mainmenu();
+        MainMenu();
 
     }
-    private void mainmenu()
+    private void MainMenu()
     {
         while (_isRunning)
         {
@@ -31,18 +31,18 @@ class menu
             switch (input)
             {
                 case "1":
-                    _goalList.addnewgoal(); // Call method to add a new goal
+                    _goalList.AddNewGoal(); // Call method to add a new goal
                     break;
                 case "2":
                     _goalList.display(rewards); // Call method to display all goals
                     break;
                 case "3":
                     Console.Clear();
-                    rewards.spendpoints(); // Call method to redeem rewards
+                    rewards.SpendPoints(); // Call method to redeem rewards
                     break;
                 case "4":
                     _isRunning = false;
-                    _goalList.save(_fileName, rewards.getpoints);
+                    _goalList.Save(_fileName, rewards.GetPoints);
                     Console.WriteLine("Goals saved successfully.");
                     Console.WriteLine("Exiting the program. Goodbye!");
                     break;

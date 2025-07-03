@@ -1,27 +1,27 @@
 using System.Security.Cryptography.X509Certificates;
 
-class Goal_list
+class Goal_List
 {
-    private List<goal> _goals;
+    private List<Goal> _goals;
 
-    public Goal_list(string fileName)
+    public Goal_List(string fileName)
     {
-        _goals = new List<goal>();
+        _goals = new List<Goal>();
         if (System.IO.File.Exists(fileName))
         {
-            load(fileName);
+            Load(fileName);
         }
         else
         {
             Console.WriteLine("File does not exist. Please create the file first.");
         }
     }
-    public void display(rewards r)
+    public void display(Rewards r)
     {
         Console.Clear();
         Console.WriteLine("Here are your goals:");
         int i = 1;
-        foreach (goal g in _goals)
+        foreach (Goal g in _goals)
         {
             g.Display(i);
             i++;
@@ -40,7 +40,7 @@ class Goal_list
             {
                 _goals[num].Record(r); // Call the Record method on the selected goal
                 Console.WriteLine("Goal marked as complete.");
-                Console.WriteLine("you now have " + r.getpoints + " points.");
+                Console.WriteLine("you now have " + r.GetPoints + " points.");
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
             }
@@ -51,11 +51,11 @@ class Goal_list
         }
 
     }
-    public void save(string fileName, int _points)
+    public void Save(string fileName, int _points)
     {
         for (int i = _goals.Count - 1; i >= 0; i--)
         {
-            if (_goals[i].getstatus())
+            if (_goals[i].GetStatus())
             {
             _goals.RemoveAt(i);
             }
@@ -67,13 +67,13 @@ class Goal_list
         {
             writer.WriteLine(_points); // Write the total points at the top of the file
             // empty the file before writing
-            foreach (goal g in _goals)
+            foreach (Goal g in _goals)
             {
-                writer.WriteLine(g.save_string());
+                writer.WriteLine(g.Save_String());
             }
         }
     }
-    private void load(string fileName)
+    private void Load(string fileName)
     {
         if (System.IO.File.Exists(fileName))
         {
@@ -98,7 +98,7 @@ class Goal_list
                         bool isComplete = bool.Parse(parts[3]);
                         string type = parts[4];
 
-                        goal g;
+                        Goal g;
                         if (type == "Eternal")
                         {
                             int numberOfTimesCompleted = int.Parse(parts[5]);
@@ -109,12 +109,12 @@ class Goal_list
                         {
                             int numberOfTimesCompleted = int.Parse(parts[5]);
                             int targetCount = int.Parse(parts[6]);
-                            g = new Check_list(name, description, points, type, targetCount, numberOfTimesCompleted);
+                            g = new Check_List(name, description, points, type, targetCount, numberOfTimesCompleted);
                             // Set numberOfTimesCompleted and targetCount here
                         }
                         else
                         {
-                            g = new simple(name, description, points, isComplete, type);
+                            g = new Simple(name, description, points, isComplete, type);
                         }
 
                         _goals.Add(g);
@@ -127,7 +127,7 @@ class Goal_list
             Console.WriteLine("File does not exist. Please create the file first.");
         }
     }
-    public void addnewgoal()
+    public void AddNewGoal()
     {
         Console.WriteLine("What type of goal would you like to create?");
         Console.WriteLine("1. Simple Goal");
@@ -143,7 +143,7 @@ class Goal_list
         int points = int.Parse(Console.ReadLine());
         if (input == "1")
         {
-            simple newGoal = new simple(name, description, points, false, "Simple");
+            Simple newGoal = new Simple(name, description, points, false, "Simple");
             _goals.Add(newGoal);
         }
         else if (input == "2")
@@ -155,7 +155,7 @@ class Goal_list
         {
             Console.Write("Enter the target count for the goal: ");
             int targetCount = int.Parse(Console.ReadLine());
-            Check_list newGoal = new Check_list(name, description, points, "Check", targetCount);
+            Check_List newGoal = new Check_List(name, description, points, "Check", targetCount);
             _goals.Add(newGoal);
         }
         else

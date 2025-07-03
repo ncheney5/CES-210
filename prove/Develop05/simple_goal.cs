@@ -1,10 +1,10 @@
-class simple : goal
+class Simple : Goal
 {
-    public simple(string name, string description,  int points,bool _isComplete, string type)
+    public Simple(string name, string description,  int points,bool _isComplete, string type)
         : base(name, description, points, isComplete:false, type)
     {
     }
-    public override void Record(rewards r)
+    public override void Record(Rewards r)
     {
         _isComplete = true;
         r.AddPoints(_points);

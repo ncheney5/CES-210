@@ -1,11 +1,11 @@
 using System.Globalization;
 
-class rewards
+class Rewards
 {
     private string _fileName;
     private int _points;
     private Dictionary<string, int> rewardlist;
-    public rewards(string fileName)
+    public Rewards(string fileName)
     {
         _fileName = fileName;
         _points = 0; // Initialize points to zero
@@ -61,7 +61,7 @@ class rewards
             }
         }
     }
-    public int getpoints
+    public int GetPoints
     {
         get { return _points; }
     }
@@ -71,7 +71,7 @@ class rewards
         Console.WriteLine($"You have earned {points} points!");
         _points += points;
     }
-    public void spendpoints()
+    public void SpendPoints()
     {
         // Logic to spend points on rewards
         Console.WriteLine($"Available rewards: {_points}");

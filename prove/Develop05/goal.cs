@@ -1,4 +1,4 @@
-abstract class goal
+abstract class Goal
 {
     protected string _name;
     protected string _description;
@@ -6,7 +6,7 @@ abstract class goal
     protected bool _isComplete;
     protected string _type;
 
-    protected goal(string name, string description, int points, bool isComplete, string type)
+    protected Goal(string name, string description, int points, bool isComplete, string type)
     {
         _name = name;
         _description = description;
@@ -15,17 +15,17 @@ abstract class goal
         _type = type;
     }
 
-    abstract public void Record(rewards r);
+    abstract public void Record(Rewards r);
     public virtual void Display(int i)
     {
         Console.WriteLine($"{i}. {_type}: {_name} - {_description} - Points: {_points} - status: {_isComplete}");
     }
-    public virtual string save_string()
+    public virtual string Save_String()
     {
         string saver = $"{_name}|{_description}|{_points}|{_isComplete}|{_type}";
         return saver;
     }
-    public bool getstatus()
+    public bool GetStatus()
     {
         return _isComplete;
     }

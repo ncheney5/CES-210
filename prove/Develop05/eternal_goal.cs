@@ -1,4 +1,4 @@
-class Eternal_Goal : goal
+class Eternal_Goal : Goal
 {
     private int _numberoftimesCompleted;
 
@@ -17,12 +17,12 @@ class Eternal_Goal : goal
     {
         Console.WriteLine($"{i}. {_type}: {_name} - {_description} - Points: {_points} - status: {_isComplete} - Completed: {_numberoftimesCompleted} times");
     }
-    public override void Record(rewards r)
+    public override void Record(Rewards r)
     {
         _numberoftimesCompleted++;
         r.AddPoints(_points);
     }
-    public override string save_string()
+    public override string Save_String()
     {
         string saver = $"{_name}|{_description}|{_points}|{_isComplete}|{_type}|{_numberoftimesCompleted}";
         return saver;
