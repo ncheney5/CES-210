@@ -10,33 +10,26 @@ class HiddenScrptureWords
 
     public void HideWords()
     {
-        List<string> verses = _scriptures.GetSplitVerses();
-        Console.WriteLine("why 1");
-        
+        List<string> words = _scriptures.GetSplitVerses(); // This is actually a flat word list
         Random random = new Random();
-        
-        foreach (string verse in verses)
+
+        int wordsToHide = random.Next(1, 4); // 1 to 3 words
+
+        int attempts = 0;
+        while (_hiddenWords.Count < words.Count && wordsToHide > 0 && attempts < 100)
         {
-            Console.WriteLine("why 2");
-            string[] words = verse.Split(' ');
-            int wordsToHide = random.Next(1, 4); // Hide 1 to 3 words
-            Console.WriteLine("why 3");
-            for (int i = 0; i < wordsToHide && words.Length > 0; i++)
+            int indexToHide = random.Next(words.Count);
+            string wordToHide = words[indexToHide];
+
+            // Make sure the word isn’t already hidden and is not just punctuation
+            if (!_hiddenWords.Contains(wordToHide) )//&& !string.IsNullOrWhiteSpace(wordToHide))
             {
-                int indexToHide = random.Next(words.Length);
-                string wordToHide = words[indexToHide];
-
-                // Ensure the word is not already hidden
-                if (!_hiddenWords.Contains(wordToHide))
-                {
-                    _hiddenWords.Add(wordToHide);
-                    Console.WriteLine($"Hiding word: {wordToHide}");
-                }
-
-                // Remove the hidden word from the array to avoid hiding it again
-                words = words.Where((w, index) => index != indexToHide).ToArray();
+                _hiddenWords.Add(wordToHide);
+                Console.WriteLine($"Hiding word: {wordToHide}");
+                wordsToHide--;
             }
 
+            attempts++;    
         }
     }
 

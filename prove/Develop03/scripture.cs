@@ -29,7 +29,7 @@ class Scriptures
 
     private void LoadVersesFromJson()
     {
-        string jsonFilePath = "book-of-mormon.json";
+        string jsonFilePath = @"C:\Users\Nate\Desktop\CES-210\prove\Develop03\bin\Debug\net8.0\book-of-mormon.json";
 
         if (!File.Exists(jsonFilePath))
         {
@@ -66,7 +66,7 @@ class Scriptures
     }
     public void DisplayScripture(List<string> hiddenWords = null)
     {
-       if (hiddenWords == null || !hiddenWords.Any())
+        if (hiddenWords == null || !hiddenWords.Any())
         {
             Console.WriteLine($"Reference: {string.Join(" ", _reference.GetReferance())}");
             Console.WriteLine($"Text: {_versesText}");
@@ -74,14 +74,22 @@ class Scriptures
         else
         {
             string displayedText = _versesText;
+
             foreach (var word in hiddenWords)
             {
-                displayedText = displayedText.Replace(word, "____");
+                displayedText = Regex.Replace(
+                    displayedText,
+                    $@"\b{Regex.Escape(word)}\b",
+                    new string('_', word.Length),
+                    RegexOptions.IgnoreCase
+                );
             }
+
             Console.WriteLine($"Reference: {string.Join(" ", _reference.GetReferance())}");
             Console.WriteLine($"Text: {displayedText}");
         }
     }
+
     public void Split()
     {
         if (string.IsNullOrEmpty(_versesText))
@@ -89,7 +97,8 @@ class Scriptures
             throw new InvalidOperationException("No verses text available to split.");
         }
 
-        _SplitVerses = _versesText.Split(new[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+        // _SplitVerses = _versesText.Split(new[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries).ToList()
+        _SplitVerses = _versesText.Split(' ').ToList();
     }
     public string GetText()
     {
