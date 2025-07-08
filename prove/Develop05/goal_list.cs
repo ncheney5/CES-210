@@ -61,12 +61,11 @@ class Goal_List
             }
         }
 
-        System.IO.File.Delete(fileName); // Delete the file before writing
-        System.IO.File.Create(fileName).Close(); // Create a new empty file
+        // System.IO.File.Delete(fileName); // Delete the file before writing
+        // System.IO.File.Create(fileName).Close(); // Create a new empty file
         using (StreamWriter writer = new StreamWriter(fileName))
         {
             writer.WriteLine(_points); // Write the total points at the top of the file
-            // empty the file before writing
             foreach (Goal g in _goals)
             {
                 writer.WriteLine(g.Save_String());
