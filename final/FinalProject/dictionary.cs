@@ -20,13 +20,14 @@ class Dict
         {
             Console.Write("Enter the name of the new language: ");
             lang = Console.ReadLine();
-            FileName = $"{lang}.txt";
+            FileName = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\data", $"{lang}.txt"));
+
             neww = true;
         }
         else
         {
             lang = input;
-            FileName = lang + ".txt";
+            FileName = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\data", $"{lang}.txt"));   
             neww = false;
         }
         readfile();
@@ -66,8 +67,8 @@ class Dict
     {
         if (neww)
         {
-            using (StreamReader reader = new StreamReader("master.txt"))
-            {
+            using (StreamReader reader = new StreamReader(Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\data", "master.txt"))))
+           {
                 string line;
                 while ((line = reader.ReadLine()) !=null)
                 {
