@@ -28,11 +28,6 @@ class Dict
             lang = input;
             FileName = lang + ".txt";
             neww = false;
-            if (File.Exists(FileName))
-            {
-                Console.WriteLine("this lang does not exsit, please enter an exsiting lang or new");
-                Dict why = new Dict();
-            }
         }
         readfile();
     }
